@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { AppSidebar } from "@/components/app-sidebar"
 import { Toaster } from "@/components/ui/toast"
+import ChangePasswordDrawer from "@/pages/admin/change-password-drawer"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,6 +36,7 @@ import {
   Settings05Icon,
   Logout01Icon,
   DashboardSpeed01Icon,
+  LockKeyholeIcon,
 } from "@hugeicons/core-free-icons"
 import { useTheme } from "@/components/theme-provider"
 
@@ -87,6 +89,7 @@ export default function AdminLayout() {
   const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchOpen, setSearchOpen] = useState(false)
+  const [passwordOpen, setPasswordOpen] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -228,6 +231,10 @@ export default function AdminLayout() {
                     <HugeiconsIcon icon={Settings05Icon} strokeWidth={2} className="size-4" />
                     Settings
                   </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setPasswordOpen(true)}>
+                    <HugeiconsIcon icon={LockKeyholeIcon} strokeWidth={2} className="size-4" />
+                    Change Password
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
                     <HugeiconsIcon icon={Logout01Icon} strokeWidth={2} className="size-4" />
@@ -240,6 +247,7 @@ export default function AdminLayout() {
           <Outlet />
         </SidebarInset>
       </SidebarProvider>
+      <ChangePasswordDrawer open={passwordOpen} onOpenChange={setPasswordOpen} />
     </Toaster>
   )
 }

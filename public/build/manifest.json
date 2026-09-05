@@ -282,7 +282,7 @@
     "src": "node_modules/@fontsource-variable/roboto/files/roboto-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BnY3Gf1m.css",
+    "file": "assets/app-BoCs_GBO.css",
     "name": "app",
     "names": [
       "app.css"
@@ -315,7 +315,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-DAf4NQTv.js",
+    "file": "assets/admin-BIaqxQYN.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -334,6 +334,7 @@
       "_use-toast-VbLbT2qf.js",
       "_ClipboardCheckIcon-BcIwJapu.js",
       "_DocumentValidationIcon-DOHmMXVw.js",
+      "_LockKeyholeIcon-Bm0M5nOv.js",
       "_Mail01Icon-qGLuNJQs.js",
       "_PackageIcon-CTboqDpI.js",
       "_Search01Icon-uevAzKav.js",

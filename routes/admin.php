@@ -8,11 +8,14 @@ use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\TeamController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
+Route::middleware(['web', 'auth', 'admin'])->prefix('api/admin')->group(function () {
     // Dashboard
     Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
     Route::get('/dashboard/recent', [DashboardController::class, 'recentEnquiries']);
     Route::get('/dashboard/tenders', [DashboardController::class, 'upcomingTenders']);
+
+    // Auth
+    Route::post('/change-password', [\App\Http\Controllers\AuthController::class, 'changePassword']);
 
     // Analytics
     Route::get('/analytics/overview', [AnalyticsController::class, 'overview']);
