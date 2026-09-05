@@ -71,10 +71,45 @@ Route::get('/privacy', function () {
     return view('privacy');
 })->name('privacy');
 
-// SEO: Sitemap
+// SEO: Sitemap (dynamic with absolute URLs)
 Route::get('/sitemap.xml', function () {
-    $content = file_get_contents(public_path('sitemap.xml'));
-    return response($content, 200, ['Content-Type' => 'application/xml']);
+    $base = rtrim(config('app.url'), '/');
+    $pages = [
+        ['loc' => '/', 'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => '/about', 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => '/trading', 'priority' => '0.9', 'changefreq' => 'monthly'],
+        ['loc' => '/tender', 'priority' => '0.9', 'changefreq' => 'monthly'],
+        ['loc' => '/consolidation', 'priority' => '0.9', 'changefreq' => 'monthly'],
+        ['loc' => '/industries', 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => '/vendor-registration', 'priority' => '0.7', 'changefreq' => 'monthly'],
+        ['loc' => '/rfq', 'priority' => '0.7', 'changefreq' => 'monthly'],
+        ['loc' => '/contact', 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => '/track', 'priority' => '0.6', 'changefreq' => 'monthly'],
+        ['loc' => '/terms', 'priority' => '0.3', 'changefreq' => 'yearly'],
+        ['loc' => '/privacy', 'priority' => '0.3', 'changefreq' => 'yearly'],
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+    $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+
+    foreach ($pages as $page) {
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$base}{$page['loc']}</loc>\n";
+        $xml .= "    <changefreq>{$page['changefreq']}</changefreq>\n";
+        $xml .= "    <priority>{$page['priority']}</priority>\n";
+        if ($page['loc'] === '/') {
+            $xml .= "    <image:image>\n";
+            $xml .= "      <image:loc>{$base}/assets/images/Hesserin Logo-01.png</image:loc>\n";
+            $xml .= "      <image:title>Husserin Investment Company Limited</image:title>\n";
+            $xml .= "    </image:image>\n";
+        }
+        $xml .= "  </url>\n";
+    }
+
+    $xml .= "</urlset>\n";
+
+    return response($xml, 200, ['Content-Type' => 'application/xml']);
 });
 
 Route::post('/api/vendor-registration', [VendorController::class, 'store']);
