@@ -90,8 +90,8 @@
     "file": "assets/UserIcon-CghnPdiK.js",
     "name": "UserIcon"
   },
-  "_breadcrumb-BKQUj5od.js": {
-    "file": "assets/breadcrumb-BKQUj5od.js",
+  "_breadcrumb-qg2D52mN.js": {
+    "file": "assets/breadcrumb-qg2D52mN.js",
     "name": "breadcrumb",
     "imports": [
       "_HugeiconsIcon-jrjYAAGe.js",
@@ -315,7 +315,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-qg_21SGX.js",
+    "file": "assets/admin-DAf4NQTv.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -329,7 +329,7 @@
       "_ToolsIcon-C_FPclXt.js",
       "_Cancel01Icon-BeNMMUFU.js",
       "_Certificate01Icon-CgM3MQUT.js",
-      "_breadcrumb-BKQUj5od.js",
+      "_breadcrumb-qg2D52mN.js",
       "_CheckmarkCircle01Icon-BiG52TOi.js",
       "_use-toast-VbLbT2qf.js",
       "_ClipboardCheckIcon-BcIwJapu.js",
@@ -395,7 +395,7 @@
     ]
   },
   "resources/js/dashboard.tsx": {
-    "file": "assets/dashboard-DTVeEuAb.js",
+    "file": "assets/dashboard-CkmrhYiF.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.tsx",
     "isEntry": true,
@@ -403,7 +403,7 @@
       "_HugeiconsIcon-jrjYAAGe.js",
       "_separator-CdFxSJBP.js",
       "_UnfoldMoreIcon-CQC4m2yo.js",
-      "_breadcrumb-BKQUj5od.js",
+      "_breadcrumb-qg2D52mN.js",
       "_Mail01Icon-qGLuNJQs.js",
       "_PackageIcon-CTboqDpI.js",
       "_TruckIcon-BwxbcyYk.js"
