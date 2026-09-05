@@ -82,8 +82,8 @@
     "file": "assets/UserIcon-CghnPdiK.js",
     "name": "UserIcon"
   },
-  "_breadcrumb-BE6Azhl9.js": {
-    "file": "assets/breadcrumb-BE6Azhl9.js",
+  "_breadcrumb-D3n7WabI.js": {
+    "file": "assets/breadcrumb-D3n7WabI.js",
     "name": "breadcrumb",
     "imports": [
       "_Mail01Icon-D2HbUAbG.js",
@@ -260,7 +260,7 @@
     "src": "node_modules/@fontsource-variable/roboto/files/roboto-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DFpnPxf9.css",
+    "file": "assets/app-DDvrl2vG.css",
     "name": "app",
     "names": [
       "app.css"
@@ -293,7 +293,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-C9q19PPm.js",
+    "file": "assets/admin-B0NR8fY_.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -303,12 +303,17 @@
       "_dropdown-menu-BVUJkok3.js",
       "_Loading03Icon-CjK6w1Eu.js",
       "_UnfoldMoreIcon-CQC4m2yo.js",
+      "_ToolsIcon-C_FPclXt.js",
       "_Cancel01Icon-BeNMMUFU.js",
-      "_breadcrumb-BE6Azhl9.js",
+      "_Certificate01Icon-CgM3MQUT.js",
+      "_breadcrumb-D3n7WabI.js",
       "_CheckmarkCircle01Icon-BiG52TOi.js",
       "_use-toast-DT_F0u0v.js",
+      "_ClipboardCheckIcon-BcIwJapu.js",
+      "_DocumentValidationIcon-DOHmMXVw.js",
       "_PackageIcon-CTboqDpI.js",
       "_Search01Icon-uevAzKav.js",
+      "_ShieldCheckIcon-DUf4HdgL.js",
       "_TruckIcon-BwxbcyYk.js"
     ]
   },
@@ -364,7 +369,7 @@
     ]
   },
   "resources/js/dashboard.tsx": {
-    "file": "assets/dashboard-CkcnrrFP.js",
+    "file": "assets/dashboard-DpwTnYoF.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.tsx",
     "isEntry": true,
@@ -372,7 +377,7 @@
       "_Mail01Icon-D2HbUAbG.js",
       "_separator-eM_DJ7Lh.js",
       "_UnfoldMoreIcon-CQC4m2yo.js",
-      "_breadcrumb-BE6Azhl9.js",
+      "_breadcrumb-D3n7WabI.js",
       "_PackageIcon-CTboqDpI.js",
       "_TruckIcon-BwxbcyYk.js"
     ]

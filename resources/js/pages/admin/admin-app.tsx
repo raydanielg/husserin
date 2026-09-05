@@ -6,11 +6,18 @@ import EnquiriesList from "./enquiries-list"
 import EnquiryDetail from "./enquiry-detail"
 import VendorsPage from "./vendors-page"
 import TradingOverview from "./trading-overview"
+import TradingOrders from "./trading-orders"
+import TradingSuppliers from "./trading-suppliers"
 import TendersActive from "./tenders-active"
+import TenderProcurement from "./tender-procurement"
+import TenderCompliance from "./tender-compliance"
 import ConsolidationShipments from "./consolidation-shipments"
+import ConsolidationOrders from "./consolidation-orders"
 import SettingsGeneral from "./settings-general"
 import SettingsTeam from "./settings-team"
-import PlaceholderPage from "./placeholder"
+import SettingsBilling from "./settings-billing"
+import IndustriesOverview from "./industries-overview"
+import IndustryDetail from "./industry-detail"
 
 export default function AdminApp() {
   return (
@@ -29,17 +36,17 @@ export default function AdminApp() {
 
         {/* Trading & Supply */}
         <Route path="/admin/trading" element={<TradingOverview />} />
-        <Route path="/admin/trading/orders" element={<PlaceholderPage title="Orders" description="Track and manage trading orders" />} />
-        <Route path="/admin/trading/suppliers" element={<PlaceholderPage title="Suppliers" description="Manage supplier relationships" />} />
+        <Route path="/admin/trading/orders" element={<TradingOrders />} />
+        <Route path="/admin/trading/suppliers" element={<TradingSuppliers />} />
 
         {/* Tender & Procurement */}
         <Route path="/admin/tenders" element={<TendersActive />} />
-        <Route path="/admin/tenders/procurement" element={<PlaceholderPage title="Procurement" description="Manage procurement processes" />} />
-        <Route path="/admin/tenders/compliance" element={<PlaceholderPage title="Compliance" description="Track compliance requirements" />} />
+        <Route path="/admin/tenders/procurement" element={<TenderProcurement />} />
+        <Route path="/admin/tenders/compliance" element={<TenderCompliance />} />
 
         {/* Cargo Consolidation */}
         <Route path="/admin/consolidation" element={<ConsolidationShipments />} />
-        <Route path="/admin/consolidation/orders" element={<PlaceholderPage title="Consolidation Orders" description="Manage consolidation orders" />} />
+        <Route path="/admin/consolidation/orders" element={<ConsolidationOrders />} />
 
         {/* Vendors */}
         <Route path="/admin/vendors" element={<VendorsPage />} />
@@ -49,14 +56,14 @@ export default function AdminApp() {
         {/* Settings */}
         <Route path="/admin/settings" element={<SettingsGeneral />} />
         <Route path="/admin/settings/team" element={<SettingsTeam />} />
-        <Route path="/admin/settings/billing" element={<PlaceholderPage title="Billing" description="Manage billing and subscriptions" />} />
+        <Route path="/admin/settings/billing" element={<SettingsBilling />} />
 
         {/* Industries */}
-        <Route path="/admin/industries" element={<PlaceholderPage title="All Industries" description="Manage industry sectors" />} />
-        <Route path="/admin/industries/government" element={<PlaceholderPage title="Government & Institutions" description="Government sector enquiries" />} />
-        <Route path="/admin/industries/construction" element={<PlaceholderPage title="Construction" description="Construction sector enquiries" />} />
-        <Route path="/admin/industries/aviation" element={<PlaceholderPage title="Aviation" description="Aviation sector enquiries" />} />
-        <Route path="/admin/industries/energy" element={<PlaceholderPage title="Energy" description="Energy sector enquiries" />} />
+        <Route path="/admin/industries" element={<IndustriesOverview />} />
+        <Route path="/admin/industries/government" element={<IndustryDetail industry="government" />} />
+        <Route path="/admin/industries/construction" element={<IndustryDetail industry="construction" />} />
+        <Route path="/admin/industries/aviation" element={<IndustryDetail industry="aviation" />} />
+        <Route path="/admin/industries/energy" element={<IndustryDetail industry="energy" />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/admin" replace />} />
