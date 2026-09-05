@@ -3,9 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Husserin Investment Company Limited · Global Trading, Procurement & Consolidation</title>
-    <meta name="description" content="We source, supply and consolidate goods for businesses, institutions and project requirements. General Trading, Tender Supply, Procurement & Cargo Consolidation.">
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/Hesserin Logo-01.png') }}" />
+    @php
+        $seoTitle = 'Husserin Investment Company Limited · Global Trading, Procurement & Consolidation';
+        $seoDescription = 'We source, supply and consolidate goods for businesses, institutions and project requirements. General Trading, Tender Supply, Procurement & Cargo Consolidation.';
+        $seoType = 'website';
+        $structuredData = [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => 'Husserin Investment Company Limited',
+            'url' => config('app.url'),
+            'description' => $seoDescription,
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => config('app.url') . '/track?q={search_term_string}',
+                'query-input' => 'required name=search_term_string',
+            ],
+        ];
+    @endphp
+    @include('partials.seo')
     @vite(['resources/css/app.css', 'resources/js/landing.tsx'])
 </head>
 <body class="bg-background">

@@ -1,0 +1,23 @@
+{
+  "name": "Husserin Investment Company Limited",
+  "short_name": "Husserin",
+  "description": "General Trading, Tender Supply, Procurement & Cargo Consolidation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/assets/images/Hesserin Logo-01.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/Hesserin Logo-01.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

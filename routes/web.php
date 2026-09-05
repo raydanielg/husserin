@@ -71,6 +71,12 @@ Route::get('/privacy', function () {
     return view('privacy');
 })->name('privacy');
 
+// SEO: Sitemap
+Route::get('/sitemap.xml', function () {
+    $content = file_get_contents(public_path('sitemap.xml'));
+    return response($content, 200, ['Content-Type' => 'application/xml']);
+});
+
 Route::post('/api/vendor-registration', [VendorController::class, 'store']);
 Route::post('/api/rfq', [RfqController::class, 'store']);
 Route::post('/api/contact', [ContactController::class, 'store']);

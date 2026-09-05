@@ -1,2 +1,25 @@
 User-agent: *
-Disallow:
+Allow: /
+Allow: /about
+Allow: /trading
+Allow: /tender
+Allow: /consolidation
+Allow: /industries
+Allow: /contact
+Allow: /track
+Allow: /vendor-registration
+Allow: /rfq
+Allow: /terms
+Allow: /privacy
+
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+
+# Sitemap
+Sitemap: /sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

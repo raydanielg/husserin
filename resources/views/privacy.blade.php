@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Privacy Policy · Husserin Investment Company</title>
-    <meta name="description" content="How Husserin Investment Company Limited collects, uses and protects your information.">
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/Hesserin Logo-01.png') }}" />
+    @php
+        $seoTitle = 'Privacy Policy · Husserin Investment Company';
+        $seoDescription = 'How Husserin Investment Company Limited collects, uses and protects your information.';
+        $seoType = 'website';
+    @endphp
+    @include('partials.seo')
     @vite(['resources/css/app.css', 'resources/js/privacy.tsx'])
 </head>
 <body class="bg-background">
