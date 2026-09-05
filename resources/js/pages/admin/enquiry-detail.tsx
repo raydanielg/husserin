@@ -39,9 +39,12 @@ export default function EnquiryDetail() {
 
   useEffect(() => {
     fetch(`/api/admin/enquiries/${id}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error("Not found")
+        return r.json()
+      })
       .then((d) => { setEnquiry(d); setNewStatus(d.status); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch(() => { setEnquiry(null); setLoading(false) })
   }, [id])
 
   const updateStatus = async () => {
