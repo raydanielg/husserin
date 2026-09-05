@@ -39,7 +39,7 @@ class AuthController extends Controller
                     'email' => $user->email,
                     'role' => $user->role,
                 ],
-                'redirect' => $user->isSuperAdmin() ? '/dashboard' : '/dashboard',
+                'redirect' => '/admin',
             ]);
         }
 

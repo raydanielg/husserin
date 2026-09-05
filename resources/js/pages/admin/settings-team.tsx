@@ -19,12 +19,17 @@ export default function SettingsTeam() {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const [createOpen, setCreateOpen] = useState(false)
+  const [accessDenied, setAccessDenied] = useState(false)
 
   const fetchUsers = useCallback(() => {
     fetch("/api/admin/team")
-      .then((r) => r.json())
+      .then((r) => {
+        if (r.status === 403) { setAccessDenied(true); setLoading(false); throw new Error("skip") }
+        if (!r.ok) throw new Error("failed")
+        return r.json()
+      })
       .then((d) => { setUsers(Array.isArray(d) ? d : (d?.data ?? [])); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch((e) => { if (e.message !== "skip") setLoading(false) })
   }, [])
 
   useEffect(() => { fetchUsers() }, [fetchUsers])
@@ -72,6 +77,16 @@ export default function SettingsTeam() {
         {loading ? (
           <div className="flex items-center justify-center py-12">
             <HugeiconsIcon icon={Loading03Icon} strokeWidth={2} className="size-6 animate-spin text-muted-foreground" />
+          </div>
+        ) : accessDenied ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <p className="text-sm font-medium text-muted-foreground">Super Admin access required</p>
+            <p className="mt-1 text-xs text-muted-foreground">Only Super Admins can view and manage the team.</p>
+          </div>
+        ) : users.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <p className="text-sm font-medium text-muted-foreground">No team members yet</p>
+            <p className="mt-1 text-xs text-muted-foreground">Click "Add Member" to invite someone.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">

@@ -84,7 +84,7 @@ export function LoginForm({
       if (res.ok && data.success) {
         success("Welcome back!", `Signed in as ${data.user.name}`)
         setTimeout(() => {
-          window.location.href = data.redirect || "/dashboard"
+          window.location.href = data.redirect || "/admin"
         }, 800)
       } else if (res.status === 403) {
         warning("Account deactivated", data.message || "Contact the administrator.")
@@ -183,15 +183,6 @@ export function LoginForm({
               )}
             </Button>
 
-            <FieldDescription className="pt-2 text-center text-lg">
-              Don&apos;t have an account?{" "}
-              <a
-                href="/register"
-                className="font-semibold text-primary underline underline-offset-4"
-              >
-                Sign up for free
-              </a>
-            </FieldDescription>
           </FieldGroup>
         </form>
       ) : (
