@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rfq;
+use App\Models\Enquiry;
 use App\Mail\RfqSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -27,12 +28,28 @@ class RfqController extends Controller
             'message' => ['nullable', 'string'],
         ]);
 
-        $enquiryId = 'RFQ-' . strtoupper(Str::random(8));
+        $year = now()->year;
+        $seq = str_pad((string) (Enquiry::where('type', 'RFQ')->whereYear('created_at', $year)->count() + 1), 5, '0', STR_PAD_LEFT);
+        $enquiryId = "RFQ-{$year}-{$seq}";
 
         $rfq = Rfq::create(array_merge($validated, [
             'enquiry_id' => $enquiryId,
             'status' => 'pending',
         ]));
+
+        Enquiry::create([
+            'reference_number' => $enquiryId,
+            'type' => 'RFQ',
+            'company_name' => $validated['company'],
+            'contact_person' => $validated['contact_person'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'] ?? null,
+            'country' => $validated['country'] ?? null,
+            'status' => 'NEW',
+            'priority' => 'NORMAL',
+            'description' => $validated['item_or_spec'],
+            'metadata' => $validated,
+        ]);
 
         Mail::to(config('mail.from.address', 'contact@hesserininvestement.com'))
             ->send(new RfqSubmission($validated, $enquiryId));
