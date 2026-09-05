@@ -15,7 +15,6 @@ import ConsolidationShipments from "./consolidation-shipments"
 import ConsolidationOrders from "./consolidation-orders"
 import SettingsGeneral from "./settings-general"
 import SettingsTeam from "./settings-team"
-import SettingsBilling from "./settings-billing"
 import IndustriesOverview from "./industries-overview"
 import IndustryDetail from "./industry-detail"
 
@@ -56,7 +55,6 @@ export default function AdminApp() {
         {/* Settings */}
         <Route path="/admin/settings" element={<SettingsGeneral />} />
         <Route path="/admin/settings/team" element={<SettingsTeam />} />
-        <Route path="/admin/settings/billing" element={<SettingsBilling />} />
 
         {/* Industries */}
         <Route path="/admin/industries" element={<IndustriesOverview />} />

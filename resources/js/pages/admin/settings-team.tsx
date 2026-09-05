@@ -21,7 +21,7 @@ export default function SettingsTeam() {
   useEffect(() => {
     fetch("/api/admin/team")
       .then((r) => r.json())
-      .then((d) => { setUsers(d); setLoading(false) })
+      .then((d) => { setUsers(Array.isArray(d) ? d : (d?.data ?? [])); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])
 

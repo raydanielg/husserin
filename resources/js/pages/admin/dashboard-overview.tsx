@@ -65,7 +65,7 @@ export default function DashboardOverview() {
       fetch("/api/admin/dashboard/recent").then((r) => r.json()),
     ]).then(([s, r]) => {
       setStats(s)
-      setRecent(r)
+      setRecent(Array.isArray(r) ? r : (r?.data ?? []))
       setLoading(false)
     }).catch(() => setLoading(false))
   }, [])

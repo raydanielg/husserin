@@ -120,7 +120,6 @@ const data = {
       items: [
         { title: "General", url: "/admin/settings" },
         { title: "Team", url: "/admin/settings/team" },
-        { title: "Billing", url: "/admin/settings/billing" },
       ],
     },
   ],

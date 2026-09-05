@@ -36,7 +36,6 @@ const routeLabels: Record<string, string> = {
   "/admin/vendors/approved": "Approved",
   "/admin/settings": "General",
   "/admin/settings/team": "Team",
-  "/admin/settings/billing": "Billing",
   "/admin/industries": "All Industries",
   "/admin/industries/government": "Government & Institutions",
   "/admin/industries/construction": "Construction",

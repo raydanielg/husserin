@@ -239,8 +239,8 @@ export default function DashboardAnalytics() {
         />
         <SummaryCard
           label="Vendors"
-          value={d?.vendor_stats.total ?? 0}
-          change={`${d?.vendor_stats.approval_rate ?? 0}% approved`}
+          value={d?.vendor_stats?.total ?? 0}
+          change={`${d?.vendor_stats?.approval_rate ?? 0}% approved`}
           positive={true}
           icon={UserGroupIcon}
         />
@@ -376,14 +376,14 @@ export default function DashboardAnalytics() {
           <h3 className="text-sm font-semibold mb-4">Conversion Funnel</h3>
           <div className="space-y-2">
             {[
-              { label: "New", value: d?.funnel.new ?? 0, color: "bg-blue-500" },
-              { label: "Under Review", value: d?.funnel.under_review ?? 0, color: "bg-purple-500" },
-              { label: "Sourcing", value: d?.funnel.sourcing ?? 0, color: "bg-cyan-500" },
-              { label: "Quoted", value: d?.funnel.quoted ?? 0, color: "bg-indigo-500" },
-              { label: "Won", value: d?.funnel.won ?? 0, color: "bg-emerald-500" },
-              { label: "Lost", value: d?.funnel.lost ?? 0, color: "bg-red-500" },
+              { label: "New", value: d?.funnel?.new ?? 0, color: "bg-blue-500" },
+              { label: "Under Review", value: d?.funnel?.under_review ?? 0, color: "bg-purple-500" },
+              { label: "Sourcing", value: d?.funnel?.sourcing ?? 0, color: "bg-cyan-500" },
+              { label: "Quoted", value: d?.funnel?.quoted ?? 0, color: "bg-indigo-500" },
+              { label: "Won", value: d?.funnel?.won ?? 0, color: "bg-emerald-500" },
+              { label: "Lost", value: d?.funnel?.lost ?? 0, color: "bg-red-500" },
             ].map((stage) => {
-              const max = Math.max(d?.funnel.new ?? 1, 1)
+              const max = Math.max(d?.funnel?.new ?? 1, 1)
               const pct = Math.round(((stage.value || 0) / max) * 100)
               return (
                 <div key={stage.label} className="flex flex-col gap-1">
@@ -455,25 +455,25 @@ export default function DashboardAnalytics() {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <p className="text-xs text-muted-foreground">Total Vendors</p>
-              <p className="text-lg font-semibold tabular-nums">{d?.vendor_stats.total ?? 0}</p>
+              <p className="text-lg font-semibold tabular-nums">{d?.vendor_stats?.total ?? 0}</p>
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Pending</p>
-              <p className="text-lg font-semibold tabular-nums text-amber-600">{d?.vendor_stats.pending ?? 0}</p>
+              <p className="text-lg font-semibold tabular-nums text-amber-600">{d?.vendor_stats?.pending ?? 0}</p>
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Approved</p>
-              <p className="text-lg font-semibold tabular-nums text-emerald-600">{d?.vendor_stats.approved ?? 0}</p>
+              <p className="text-lg font-semibold tabular-nums text-emerald-600">{d?.vendor_stats?.approved ?? 0}</p>
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Rejected</p>
-              <p className="text-lg font-semibold tabular-nums text-red-600">{d?.vendor_stats.rejected ?? 0}</p>
+              <p className="text-lg font-semibold tabular-nums text-red-600">{d?.vendor_stats?.rejected ?? 0}</p>
             </div>
           </div>
           <div className="mt-3 border-t pt-3">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Approval Rate</span>
-              <span className="text-sm font-semibold tabular-nums text-emerald-600">{d?.vendor_stats.approval_rate ?? 0}%</span>
+              <span className="text-sm font-semibold tabular-nums text-emerald-600">{d?.vendor_stats?.approval_rate ?? 0}%</span>
             </div>
           </div>
           <Link to="/admin/vendors" className="block mt-4">
