@@ -280,7 +280,7 @@
     ]
   },
   "resources/js/about.tsx": {
-    "file": "assets/about-Dg1AWLyX.js",
+    "file": "assets/about-DnWaJOZt.js",
     "name": "about",
     "src": "resources/js/about.tsx",
     "isEntry": true,
@@ -293,7 +293,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-BW9JtEyD.js",
+    "file": "assets/admin-CFyDs5Lp.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -319,7 +319,7 @@
     "isEntry": true
   },
   "resources/js/auth.tsx": {
-    "file": "assets/auth-BIRzlIjG.js",
+    "file": "assets/auth-CFZh3TMj.js",
     "name": "auth",
     "src": "resources/js/auth.tsx",
     "isEntry": true,
@@ -333,7 +333,7 @@
     ]
   },
   "resources/js/consolidation.tsx": {
-    "file": "assets/consolidation-CTE2X_WQ.js",
+    "file": "assets/consolidation-CNLxHW81.js",
     "name": "consolidation",
     "src": "resources/js/consolidation.tsx",
     "isEntry": true,
@@ -348,7 +348,7 @@
     ]
   },
   "resources/js/contact.tsx": {
-    "file": "assets/contact-D-CLrDgZ.js",
+    "file": "assets/contact-BhvlClY1.js",
     "name": "contact",
     "src": "resources/js/contact.tsx",
     "isEntry": true,
@@ -364,7 +364,7 @@
     ]
   },
   "resources/js/dashboard.tsx": {
-    "file": "assets/dashboard-D1KOYYW2.js",
+    "file": "assets/dashboard-CkcnrrFP.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.tsx",
     "isEntry": true,
@@ -378,7 +378,7 @@
     ]
   },
   "resources/js/industries-page.tsx": {
-    "file": "assets/industries-page-BJeiWKW-.js",
+    "file": "assets/industries-page-BAGF59wd.js",
     "name": "industries-page",
     "src": "resources/js/industries-page.tsx",
     "isEntry": true,
@@ -391,7 +391,7 @@
     ]
   },
   "resources/js/landing.tsx": {
-    "file": "assets/landing-uteB4oDd.js",
+    "file": "assets/landing-BCw89Ovd.js",
     "name": "landing",
     "src": "resources/js/landing.tsx",
     "isEntry": true,
@@ -407,7 +407,7 @@
     ]
   },
   "resources/js/privacy.tsx": {
-    "file": "assets/privacy-B_RsR7JX.js",
+    "file": "assets/privacy-DzXdbAfb.js",
     "name": "privacy",
     "src": "resources/js/privacy.tsx",
     "isEntry": true,
@@ -417,7 +417,7 @@
     ]
   },
   "resources/js/register.tsx": {
-    "file": "assets/register-COUKm-ft.js",
+    "file": "assets/register-DlYDwAve.js",
     "name": "register",
     "src": "resources/js/register.tsx",
     "isEntry": true,
@@ -431,7 +431,7 @@
     ]
   },
   "resources/js/rfq.tsx": {
-    "file": "assets/rfq-Bz9doNzZ.js",
+    "file": "assets/rfq-BWvOYhk_.js",
     "name": "rfq",
     "src": "resources/js/rfq.tsx",
     "isEntry": true,
@@ -447,7 +447,7 @@
     ]
   },
   "resources/js/tender.tsx": {
-    "file": "assets/tender-B9Sx5w3n.js",
+    "file": "assets/tender-Dg3nRUQ6.js",
     "name": "tender",
     "src": "resources/js/tender.tsx",
     "isEntry": true,
@@ -463,7 +463,7 @@
     ]
   },
   "resources/js/terms.tsx": {
-    "file": "assets/terms-Cfmy5YS0.js",
+    "file": "assets/terms-BzoLUY1J.js",
     "name": "terms",
     "src": "resources/js/terms.tsx",
     "isEntry": true,
@@ -473,7 +473,7 @@
     ]
   },
   "resources/js/track.tsx": {
-    "file": "assets/track-uzk9gm0P.js",
+    "file": "assets/track-CUolPL8y.js",
     "name": "track",
     "src": "resources/js/track.tsx",
     "isEntry": true,
@@ -488,7 +488,7 @@
     ]
   },
   "resources/js/trading.tsx": {
-    "file": "assets/trading-uMYFKLzv.js",
+    "file": "assets/trading-DtRS1Loi.js",
     "name": "trading",
     "src": "resources/js/trading.tsx",
     "isEntry": true,
@@ -503,7 +503,7 @@
     ]
   },
   "resources/js/vendor-registration.tsx": {
-    "file": "assets/vendor-registration-C8Mi6v-7.js",
+    "file": "assets/vendor-registration-Hlo9_KWD.js",
     "name": "vendor-registration",
     "src": "resources/js/vendor-registration.tsx",
     "isEntry": true,
