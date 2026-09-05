@@ -3,6 +3,7 @@
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\RfqController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TrackingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,6 +42,10 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/track', function () {
+    return view('track');
+})->name('track');
+
 Route::get('/vendor-registration', function () {
     return view('vendor-registration');
 })->name('vendor-registration');
@@ -60,3 +65,4 @@ Route::get('/privacy', function () {
 Route::post('/api/vendor-registration', [VendorController::class, 'store']);
 Route::post('/api/rfq', [RfqController::class, 'store']);
 Route::post('/api/contact', [ContactController::class, 'store']);
+Route::post('/api/track', [TrackingController::class, 'lookup']);
