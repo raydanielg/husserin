@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Loading03Icon } from "@hugeicons/core-free-icons"
+import { Loading03Icon, Add01Icon } from "@hugeicons/core-free-icons"
 import { useToast } from "@/hooks/use-toast"
 import { formatDate } from "./helpers"
+import CreateTeamMemberModal from "./create-team-modal"
 
 interface User {
   id: number
@@ -17,13 +18,16 @@ export default function SettingsTeam() {
   const { success, error } = useToast()
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
+  const [createOpen, setCreateOpen] = useState(false)
 
-  useEffect(() => {
+  const fetchUsers = useCallback(() => {
     fetch("/api/admin/team")
       .then((r) => r.json())
       .then((d) => { setUsers(Array.isArray(d) ? d : (d?.data ?? [])); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])
+
+  useEffect(() => { fetchUsers() }, [fetchUsers])
 
   const toggleActive = async (id: number, current: boolean) => {
     try {
@@ -49,8 +53,19 @@ export default function SettingsTeam() {
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 pt-0 lg:p-6">
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight">Team Management</h1>
-        <p className="text-sm text-muted-foreground">Manage admin users and their access</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Team Management</h1>
+            <p className="text-sm text-muted-foreground">Manage admin users and their access</p>
+          </div>
+          <button
+            onClick={() => setCreateOpen(true)}
+            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            <HugeiconsIcon icon={Add01Icon} strokeWidth={2} className="size-4" />
+            Add Member
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col gap-4 rounded-xl border border-border bg-background p-4 lg:p-6">
@@ -102,6 +117,8 @@ export default function SettingsTeam() {
           </div>
         )}
       </div>
+
+      <CreateTeamMemberModal open={createOpen} onOpenChange={setCreateOpen} onCreated={fetchUsers} />
     </div>
   )
 }

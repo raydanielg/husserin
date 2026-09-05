@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Loading03Icon, Search01Icon } from "@hugeicons/core-free-icons"
+import { Loading03Icon, Search01Icon, Add01Icon } from "@hugeicons/core-free-icons"
 import { getStatusColor, getPriorityColor, formatDate } from "./helpers"
+import CreateEnquiryModal from "./create-enquiry-modal"
 
 interface Enquiry {
   id: number
@@ -33,6 +34,7 @@ export default function EnquiriesList({ fixedType }: { fixedType?: string }) {
   const [search, setSearch] = useState("")
   const [status, setStatus] = useState("")
   const [page, setPage] = useState(1)
+  const [createOpen, setCreateOpen] = useState(false)
 
   const type = fixedType || searchParams.get("type") || ""
 
@@ -58,8 +60,19 @@ export default function EnquiriesList({ fixedType }: { fixedType?: string }) {
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 pt-0 lg:p-6">
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
-        <p className="text-sm text-muted-foreground">{data?.total ?? 0} total enquiries</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
+            <p className="text-sm text-muted-foreground">{data?.total ?? 0} total enquiries</p>
+          </div>
+          <button
+            onClick={() => setCreateOpen(true)}
+            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            <HugeiconsIcon icon={Add01Icon} strokeWidth={2} className="size-4" />
+            New Enquiry
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col gap-4 rounded-xl border border-border bg-background p-4 lg:p-6">
@@ -165,6 +178,8 @@ export default function EnquiriesList({ fixedType }: { fixedType?: string }) {
           </>
         )}
       </div>
+
+      <CreateEnquiryModal open={createOpen} onOpenChange={setCreateOpen} fixedType={fixedType} onCreated={() => setPage(1)} />
     </div>
   )
 }

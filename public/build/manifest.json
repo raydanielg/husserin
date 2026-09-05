@@ -82,8 +82,8 @@
     "file": "assets/UserIcon-CghnPdiK.js",
     "name": "UserIcon"
   },
-  "_breadcrumb-D3n7WabI.js": {
-    "file": "assets/breadcrumb-D3n7WabI.js",
+  "_breadcrumb-CI8-nRe9.js": {
+    "file": "assets/breadcrumb-CI8-nRe9.js",
     "name": "breadcrumb",
     "imports": [
       "_Mail01Icon-D2HbUAbG.js",
@@ -260,7 +260,7 @@
     "src": "node_modules/@fontsource-variable/roboto/files/roboto-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DDvrl2vG.css",
+    "file": "assets/app-DF-fpOul.css",
     "name": "app",
     "names": [
       "app.css"
@@ -293,7 +293,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-B0NR8fY_.js",
+    "file": "assets/admin-LoNZT7nK.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -306,7 +306,7 @@
       "_ToolsIcon-C_FPclXt.js",
       "_Cancel01Icon-BeNMMUFU.js",
       "_Certificate01Icon-CgM3MQUT.js",
-      "_breadcrumb-D3n7WabI.js",
+      "_breadcrumb-CI8-nRe9.js",
       "_CheckmarkCircle01Icon-BiG52TOi.js",
       "_use-toast-DT_F0u0v.js",
       "_ClipboardCheckIcon-BcIwJapu.js",
@@ -369,7 +369,7 @@
     ]
   },
   "resources/js/dashboard.tsx": {
-    "file": "assets/dashboard-DpwTnYoF.js",
+    "file": "assets/dashboard-JYX13ena.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.tsx",
     "isEntry": true,
@@ -377,7 +377,7 @@
       "_Mail01Icon-D2HbUAbG.js",
       "_separator-eM_DJ7Lh.js",
       "_UnfoldMoreIcon-CQC4m2yo.js",
-      "_breadcrumb-D3n7WabI.js",
+      "_breadcrumb-CI8-nRe9.js",
       "_PackageIcon-CTboqDpI.js",
       "_TruckIcon-BwxbcyYk.js"
     ]

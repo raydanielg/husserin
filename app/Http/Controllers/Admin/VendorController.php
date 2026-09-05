@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Vendor;
 use App\Models\AuditLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class VendorController extends Controller
 {
@@ -31,6 +32,44 @@ class VendorController extends Controller
         $vendors = $query->latest()->paginate($perPage);
 
         return response()->json($vendors);
+    }
+
+    public function create(Request $request)
+    {
+        $validated = $request->validate([
+            'company_name' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:100'],
+            'contact_person' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:500'],
+            'category' => ['required', 'string', 'max:255'],
+            'brands' => ['nullable', 'string'],
+            'certifications' => ['nullable', 'string'],
+            'message' => ['nullable', 'string'],
+        ]);
+
+        $vendor = Vendor::create([
+            'enquiry_id' => 'VND-' . date('Y') . '-' . strtoupper(Str::random(6)),
+            'status' => 'pending',
+            ...$validated,
+        ]);
+
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'action' => 'VENDOR_CREATED',
+            'module' => 'Vendor',
+            'reference_number' => $vendor->enquiry_id,
+            'description' => "Created vendor {$vendor->company_name}",
+            'new_values' => $validated,
+            'ip_address' => $request->ip(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'vendor' => $vendor,
+        ], 201);
     }
 
     public function show($id)

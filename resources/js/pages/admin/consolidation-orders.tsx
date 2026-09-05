@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Loading03Icon, Search01Icon, TruckIcon, PackageIcon, Globe02Icon, CheckmarkCircle01Icon } from "@hugeicons/core-free-icons"
+import { Loading03Icon, Search01Icon, TruckIcon, PackageIcon, Globe02Icon, CheckmarkCircle01Icon, Add01Icon } from "@hugeicons/core-free-icons"
 import { getStatusColor, getPriorityColor, formatDate } from "./helpers"
+import CreateEnquiryModal from "./create-enquiry-modal"
 
 interface Enquiry {
   id: number
@@ -33,6 +34,7 @@ export default function ConsolidationOrders() {
   const [search, setSearch] = useState("")
   const [status, setStatus] = useState("")
   const [page, setPage] = useState(1)
+  const [createOpen, setCreateOpen] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -59,8 +61,16 @@ export default function ConsolidationOrders() {
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 pt-0 lg:p-6">
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight">Consolidation Orders</h1>
-        <p className="text-sm text-muted-foreground">Manage cargo consolidation orders and shipments</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Consolidation Orders</h1>
+            <p className="text-sm text-muted-foreground">Manage cargo consolidation orders and shipments</p>
+          </div>
+          <button onClick={() => setCreateOpen(true)} className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+            <HugeiconsIcon icon={Add01Icon} strokeWidth={2} className="size-4" />
+            New Order
+          </button>
+        </div>
       </div>
 
       <div className="grid auto-rows-min gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -167,6 +177,8 @@ export default function ConsolidationOrders() {
           </>
         )}
       </div>
+
+      <CreateEnquiryModal open={createOpen} onOpenChange={setCreateOpen} fixedType="CONSOLIDATION" onCreated={() => setPage(1)} />
     </div>
   )
 }

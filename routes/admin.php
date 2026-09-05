@@ -20,6 +20,7 @@ Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
 
     // Enquiries
     Route::get('/enquiries', [EnquiryController::class, 'index']);
+    Route::post('/enquiries', [EnquiryController::class, 'create']);
     Route::get('/enquiries/{id}', [EnquiryController::class, 'show']);
     Route::put('/enquiries/{id}/status', [EnquiryController::class, 'updateStatus']);
     Route::put('/enquiries/{id}/assign', [EnquiryController::class, 'assign']);
@@ -29,6 +30,7 @@ Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
 
     // Vendors
     Route::get('/vendors', [AdminVendorController::class, 'index']);
+    Route::post('/vendors', [AdminVendorController::class, 'create']);
     Route::get('/vendors/{id}', [AdminVendorController::class, 'show']);
     Route::put('/vendors/{id}/status', [AdminVendorController::class, 'updateStatus']);
 
@@ -38,5 +40,6 @@ Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
 
     // Team (Super Admin only)
     Route::get('/team', [TeamController::class, 'index'])->middleware('superadmin');
+    Route::post('/team', [TeamController::class, 'create'])->middleware('superadmin');
     Route::put('/team/{id}', [TeamController::class, 'update'])->middleware('superadmin');
 });
