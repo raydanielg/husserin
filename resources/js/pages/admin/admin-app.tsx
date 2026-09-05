@@ -20,18 +20,25 @@ import IndustriesOverview from "./industries-overview"
 import IndustryDetail from "./industry-detail"
 
 function useUserRole() {
-  const [role, setRole] = useState<string>("STAFF")
+  const [role, setRole] = useState<string | null>(null)
   useEffect(() => {
     fetch("/api/me")
       .then((r) => r.json())
-      .then((d) => { if (d?.user?.role) setRole(d.user.role) })
-      .catch(() => {})
+      .then((d) => { if (d?.user?.role) setRole(d.user.role); else setRole("STAFF") })
+      .catch(() => setRole("STAFF"))
   }, [])
   return role
 }
 
 function SuperAdminOnly({ children }: { children: React.ReactNode }) {
   const role = useUserRole()
+  if (role === null) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <div className="size-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    )
+  }
   if (role !== "SUPER_ADMIN") return <Navigate to="/admin" replace />
   return <>{children}</>
 }
