@@ -51,6 +51,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get('/admin/{any?}', function () {
+    return view('admin');
+})->where('any', '.*')->name('admin')->middleware('auth');
+
 Route::get('/vendor-registration', function () {
     return view('vendor-registration');
 })->name('vendor-registration');

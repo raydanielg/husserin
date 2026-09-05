@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\VendorController as AdminVendorController;
 use App\Http\Controllers\Admin\AuditLogController;
+use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\Admin\TeamController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
@@ -11,6 +13,10 @@ Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
     Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
     Route::get('/dashboard/recent', [DashboardController::class, 'recentEnquiries']);
     Route::get('/dashboard/tenders', [DashboardController::class, 'upcomingTenders']);
+
+    // Analytics
+    Route::get('/analytics/overview', [AnalyticsController::class, 'overview']);
+    Route::get('/analytics/enquiries-by-type', [AnalyticsController::class, 'enquiriesByType']);
 
     // Enquiries
     Route::get('/enquiries', [EnquiryController::class, 'index']);
@@ -29,4 +35,8 @@ Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
     // Audit Logs (Super Admin only)
     Route::get('/audit-logs', [AuditLogController::class, 'index'])
         ->middleware('superadmin');
+
+    // Team (Super Admin only)
+    Route::get('/team', [TeamController::class, 'index'])->middleware('superadmin');
+    Route::put('/team/{id}', [TeamController::class, 'update'])->middleware('superadmin');
 });
