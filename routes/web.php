@@ -4,6 +4,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\RfqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -70,3 +71,7 @@ Route::post('/api/vendor-registration', [VendorController::class, 'store']);
 Route::post('/api/rfq', [RfqController::class, 'store']);
 Route::post('/api/contact', [ContactController::class, 'store']);
 Route::post('/api/track', [TrackingController::class, 'lookup']);
+
+Route::post('/api/login', [AuthController::class, 'login']);
+Route::post('/api/logout', [AuthController::class, 'logout']);
+Route::get('/api/me', [AuthController::class, 'me']);

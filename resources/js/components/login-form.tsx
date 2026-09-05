@@ -21,6 +21,7 @@ import {
   Loading03Icon,
   ArrowRight01Icon,
 } from "@hugeicons/core-free-icons"
+import { useToast } from "@/hooks/use-toast"
 
 function fieldErrorClass(error?: string) {
   return error ? "border-red-500 focus-visible:ring-red-500/30" : ""
@@ -32,11 +33,13 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { success, error, warning } = useToast()
   const [step, setStep] = useState<Step>("email")
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [remember, setRemember] = useState(true)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleEmailSubmit = (e: React.FormEvent) => {
@@ -46,14 +49,18 @@ export function LoginForm({
       setErrors({ email: "Email is required" })
       return
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrors({ email: "Please enter a valid email address" })
+      return
+    }
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
       setStep("password")
-    }, 800)
+    }, 600)
   }
 
-  const handlePasswordSubmit = (e: React.FormEvent) => {
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setErrors({})
     if (!password) {
@@ -61,7 +68,35 @@ export function LoginForm({
       return
     }
     setLoading(true)
-    setTimeout(() => setLoading(false), 1500)
+
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || "",
+        },
+        body: JSON.stringify({ email, password, remember }),
+      })
+
+      const data = await res.json()
+
+      if (res.ok && data.success) {
+        success("Welcome back!", `Signed in as ${data.user.name}`)
+        setTimeout(() => {
+          window.location.href = data.redirect || "/dashboard"
+        }, 800)
+      } else if (res.status === 403) {
+        warning("Account deactivated", data.message || "Contact the administrator.")
+        setLoading(false)
+      } else {
+        error("Sign in failed", data.message || "Invalid email or password.")
+        setLoading(false)
+      }
+    } catch {
+      error("Connection error", "Could not connect to the server. Please try again.")
+      setLoading(false)
+    }
   }
 
   const handleBack = () => {
