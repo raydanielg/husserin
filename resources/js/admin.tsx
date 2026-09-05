@@ -4,7 +4,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import AdminApp from "@/pages/admin/admin-app"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <BrowserRouter>
       <AdminApp />
     </BrowserRouter>

@@ -3,7 +3,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import ConsolidationPage from "@/pages/consolidation"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <ConsolidationPage />
   </DirectionProvider>
 )

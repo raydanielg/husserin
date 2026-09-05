@@ -3,7 +3,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import TenderPage from "@/pages/tender"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <TenderPage />
   </DirectionProvider>
 )

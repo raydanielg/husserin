@@ -3,7 +3,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import PrivacyPage from "@/pages/privacy"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <PrivacyPage />
   </DirectionProvider>
 )

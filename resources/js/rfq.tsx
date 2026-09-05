@@ -3,7 +3,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import RfqPage from "@/pages/rfq"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <RfqPage />
   </DirectionProvider>
 )

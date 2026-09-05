@@ -3,7 +3,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import VendorRegistrationPage from "@/pages/vendor-registration"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <VendorRegistrationPage />
   </DirectionProvider>
 )

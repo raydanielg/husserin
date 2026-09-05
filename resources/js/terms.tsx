@@ -3,7 +3,7 @@ import { DirectionProvider } from "@/components/ui/direction"
 import TermsPage from "@/pages/terms"
 
 createRoot(document.getElementById("app")!).render(
-  <DirectionProvider dir="ltr">
+  <DirectionProvider direction="ltr">
     <TermsPage />
   </DirectionProvider>
 )
