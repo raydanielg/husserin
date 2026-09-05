@@ -16,7 +16,6 @@ import {
   Globe02Icon,
   PackageIcon,
   DocumentValidationIcon,
-  GlobalSearchIcon,
   UserGroupIcon,
   Mail01Icon,
   ChartLineIcon,
@@ -28,17 +27,7 @@ import {
   BoltIcon,
 } from "@hugeicons/core-free-icons"
 
-const data = {
-  teams: [
-    {
-      name: "Husserin Investment",
-      logo: (
-        <HugeiconsIcon icon={Globe02Icon} strokeWidth={2} className="size-4" />
-      ),
-      plan: "Admin Dashboard",
-    },
-  ],
-  navMain: [
+const allNavMain: any[] = [
     {
       title: "Dashboard",
       url: "/admin",
@@ -46,6 +35,7 @@ const data = {
         <HugeiconsIcon icon={ChartLineIcon} strokeWidth={2} />
       ),
       isActive: true,
+      roles: ["SUPER_ADMIN", "STAFF"],
       items: [
         { title: "Overview", url: "/admin" },
         { title: "Analytics", url: "/admin/analytics" },
@@ -57,6 +47,7 @@ const data = {
       icon: (
         <HugeiconsIcon icon={Mail01Icon} strokeWidth={2} />
       ),
+      roles: ["SUPER_ADMIN", "STAFF"],
       items: [
         { title: "All Enquiries", url: "/admin/enquiries" },
         { title: "Vendor Registrations", url: "/admin/enquiries/vendors" },
@@ -70,6 +61,7 @@ const data = {
       icon: (
         <HugeiconsIcon icon={PackageIcon} strokeWidth={2} />
       ),
+      roles: ["SUPER_ADMIN", "STAFF"],
       items: [
         { title: "Overview", url: "/admin/trading" },
         { title: "Orders", url: "/admin/trading/orders" },
@@ -82,6 +74,7 @@ const data = {
       icon: (
         <HugeiconsIcon icon={DocumentValidationIcon} strokeWidth={2} />
       ),
+      roles: ["SUPER_ADMIN", "STAFF"],
       items: [
         { title: "Active Tenders", url: "/admin/tenders" },
         { title: "Procurement", url: "/admin/tenders/procurement" },
@@ -94,6 +87,7 @@ const data = {
       icon: (
         <HugeiconsIcon icon={TruckIcon} strokeWidth={2} />
       ),
+      roles: ["SUPER_ADMIN", "STAFF"],
       items: [
         { title: "Shipments", url: "/admin/consolidation" },
         { title: "Consolidation Orders", url: "/admin/consolidation/orders" },
@@ -105,6 +99,7 @@ const data = {
       icon: (
         <HugeiconsIcon icon={UserGroupIcon} strokeWidth={2} />
       ),
+      roles: ["SUPER_ADMIN", "STAFF"],
       items: [
         { title: "All Vendors", url: "/admin/vendors" },
         { title: "Pending Review", url: "/admin/vendors/pending" },
@@ -117,13 +112,15 @@ const data = {
       icon: (
         <HugeiconsIcon icon={Settings05Icon} strokeWidth={2} />
       ),
+      roles: ["SUPER_ADMIN"],
       items: [
         { title: "General", url: "/admin/settings" },
         { title: "Team", url: "/admin/settings/team" },
       ],
     },
-  ],
-  projects: [
+  ]
+
+const projects = [
     {
       name: "Government & Institutions",
       url: "/admin/industries/government",
@@ -152,18 +149,36 @@ const data = {
         <HugeiconsIcon icon={BoltIcon} strokeWidth={2} className="size-4" />
       ),
     },
-  ],
+  ]
+
+const teams = [
+  {
+    name: "Husserin Investment",
+    logo: (
+      <HugeiconsIcon icon={Globe02Icon} strokeWidth={2} className="size-4" />
+    ),
+    plan: "Admin Dashboard",
+  },
+]
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  userRole?: string
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ userRole, ...props }: AppSidebarProps) {
+  const role = userRole || "STAFF"
+  const filteredNavMain = allNavMain.filter(
+    (item) => item.roles.includes(role)
+  )
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={filteredNavMain} />
+        <NavProjects projects={projects} />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

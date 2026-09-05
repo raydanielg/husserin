@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import AdminLayout from "@/components/admin-layout"
 import DashboardOverview from "./dashboard-overview"
 import DashboardAnalytics from "./dashboard-analytics"
@@ -17,6 +18,23 @@ import SettingsGeneral from "./settings-general"
 import SettingsTeam from "./settings-team"
 import IndustriesOverview from "./industries-overview"
 import IndustryDetail from "./industry-detail"
+
+function useUserRole() {
+  const [role, setRole] = useState<string>("STAFF")
+  useEffect(() => {
+    fetch("/api/me")
+      .then((r) => r.json())
+      .then((d) => { if (d?.user?.role) setRole(d.user.role) })
+      .catch(() => {})
+  }, [])
+  return role
+}
+
+function SuperAdminOnly({ children }: { children: React.ReactNode }) {
+  const role = useUserRole()
+  if (role !== "SUPER_ADMIN") return <Navigate to="/admin" replace />
+  return <>{children}</>
+}
 
 export default function AdminApp() {
   return (
@@ -52,9 +70,9 @@ export default function AdminApp() {
         <Route path="/admin/vendors/pending" element={<VendorsPage fixedStatus="pending" />} />
         <Route path="/admin/vendors/approved" element={<VendorsPage fixedStatus="approved" />} />
 
-        {/* Settings */}
-        <Route path="/admin/settings" element={<SettingsGeneral />} />
-        <Route path="/admin/settings/team" element={<SettingsTeam />} />
+        {/* Settings - Super Admin only */}
+        <Route path="/admin/settings" element={<SuperAdminOnly><SettingsGeneral /></SuperAdminOnly>} />
+        <Route path="/admin/settings/team" element={<SuperAdminOnly><SettingsTeam /></SuperAdminOnly>} />
 
         {/* Industries */}
         <Route path="/admin/industries" element={<IndustriesOverview />} />

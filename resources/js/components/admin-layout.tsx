@@ -90,7 +90,7 @@ export default function AdminLayout() {
   const searchRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetch("/api/auth/me")
+    fetch("/api/me")
       .then((r) => r.json())
       .then((d) => { if (d?.user) setUser(d.user) })
       .catch(() => {})
@@ -117,7 +117,7 @@ export default function AdminLayout() {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", {
+      await fetch("/api/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -135,7 +135,7 @@ export default function AdminLayout() {
   return (
     <Toaster>
       <SidebarProvider>
-        <AppSidebar />
+        <AppSidebar userRole={user?.role} />
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">

@@ -315,7 +315,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-jX76E5wQ.js",
+    "file": "assets/admin-qg_21SGX.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -348,7 +348,7 @@
     "isEntry": true
   },
   "resources/js/auth.tsx": {
-    "file": "assets/auth-BxDjpHrS.js",
+    "file": "assets/auth-BBQpxosT.js",
     "name": "auth",
     "src": "resources/js/auth.tsx",
     "isEntry": true,
