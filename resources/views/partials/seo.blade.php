@@ -46,8 +46,8 @@
 <!-- Structured Data: Organization -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
+  "@@context": "https://schema.org",
+  "@@type": "Organization",
   "name": "Husserin Investment Company Limited",
   "url": "{{ $siteUrl }}",
   "logo": "{{ $defaultImage }}",
