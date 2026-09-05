@@ -19,6 +19,10 @@
     "file": "assets/ClipboardCheckIcon-BcIwJapu.js",
     "name": "ClipboardCheckIcon"
   },
+  "_Copy01Icon-DrPxamgF.js": {
+    "file": "assets/Copy01Icon-DrPxamgF.js",
+    "name": "Copy01Icon"
+  },
   "_DocumentValidationIcon-DOHmMXVw.js": {
     "file": "assets/DocumentValidationIcon-DOHmMXVw.js",
     "name": "DocumentValidationIcon"
@@ -90,8 +94,8 @@
     "file": "assets/UserIcon-CghnPdiK.js",
     "name": "UserIcon"
   },
-  "_breadcrumb-qg2D52mN.js": {
-    "file": "assets/breadcrumb-qg2D52mN.js",
+  "_breadcrumb-CghhGxmT.js": {
+    "file": "assets/breadcrumb-CghhGxmT.js",
     "name": "breadcrumb",
     "imports": [
       "_HugeiconsIcon-jrjYAAGe.js",
@@ -217,14 +221,15 @@
       "_useTransitionStatus-BEt1whq_.js"
     ]
   },
-  "_textarea-cqYOnKRt.js": {
-    "file": "assets/textarea-cqYOnKRt.js",
+  "_textarea-CBA21ja8.js": {
+    "file": "assets/textarea-CBA21ja8.js",
     "name": "textarea",
     "imports": [
       "_HugeiconsIcon-jrjYAAGe.js",
       "_dropdown-menu-Cgz6kUR2.js",
       "_Cancel01Icon-BeNMMUFU.js",
-      "_CheckmarkCircle01Icon-BiG52TOi.js"
+      "_CheckmarkCircle01Icon-BiG52TOi.js",
+      "_Copy01Icon-DrPxamgF.js"
     ]
   },
   "_use-toast-VbLbT2qf.js": {
@@ -282,7 +287,7 @@
     "src": "node_modules/@fontsource-variable/roboto/files/roboto-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Dn05amX1.css",
+    "file": "assets/app-TBPdzf5n.css",
     "name": "app",
     "names": [
       "app.css"
@@ -315,7 +320,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-QWV5eONC.js",
+    "file": "assets/admin-CyhgBfEz.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,
@@ -329,10 +334,11 @@
       "_ToolsIcon-C_FPclXt.js",
       "_Cancel01Icon-BeNMMUFU.js",
       "_Certificate01Icon-CgM3MQUT.js",
-      "_breadcrumb-qg2D52mN.js",
+      "_breadcrumb-CghhGxmT.js",
       "_CheckmarkCircle01Icon-BiG52TOi.js",
       "_use-toast-VbLbT2qf.js",
       "_ClipboardCheckIcon-BcIwJapu.js",
+      "_Copy01Icon-DrPxamgF.js",
       "_DocumentValidationIcon-DOHmMXVw.js",
       "_LockKeyholeIcon-Bm0M5nOv.js",
       "_Mail01Icon-qGLuNJQs.js",
@@ -379,7 +385,7 @@
     ]
   },
   "resources/js/contact.tsx": {
-    "file": "assets/contact-D8fdaXEc.js",
+    "file": "assets/contact-BViiI-Pf.js",
     "name": "contact",
     "src": "resources/js/contact.tsx",
     "isEntry": true,
@@ -389,14 +395,14 @@
       "_input-D5N61Orx.js",
       "_dropdown-menu-Cgz6kUR2.js",
       "_footer-DYYFf_F2.js",
-      "_textarea-cqYOnKRt.js",
+      "_textarea-CBA21ja8.js",
       "_Mail01Icon-qGLuNJQs.js",
       "_UserIcon-CghnPdiK.js",
       "_page-hero-BTjKApsn.js"
     ]
   },
   "resources/js/dashboard.tsx": {
-    "file": "assets/dashboard-CkmrhYiF.js",
+    "file": "assets/dashboard-CIwZ0dUQ.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.tsx",
     "isEntry": true,
@@ -404,7 +410,7 @@
       "_HugeiconsIcon-jrjYAAGe.js",
       "_separator-CdFxSJBP.js",
       "_UnfoldMoreIcon-CQC4m2yo.js",
-      "_breadcrumb-qg2D52mN.js",
+      "_breadcrumb-CghhGxmT.js",
       "_Mail01Icon-qGLuNJQs.js",
       "_PackageIcon-CTboqDpI.js",
       "_TruckIcon-BwxbcyYk.js"
@@ -479,7 +485,7 @@
     ]
   },
   "resources/js/rfq.tsx": {
-    "file": "assets/rfq-DtrV2iB_.js",
+    "file": "assets/rfq-tyKtZ8hx.js",
     "name": "rfq",
     "src": "resources/js/rfq.tsx",
     "isEntry": true,
@@ -489,7 +495,7 @@
       "_input-D5N61Orx.js",
       "_checkbox-DNoUT1cs.js",
       "_footer-DYYFf_F2.js",
-      "_textarea-cqYOnKRt.js",
+      "_textarea-CBA21ja8.js",
       "_Mail01Icon-qGLuNJQs.js",
       "_UserIcon-CghnPdiK.js",
       "_select-DC8CG7xE.js"
@@ -566,7 +572,7 @@
     ]
   },
   "resources/js/vendor-registration.tsx": {
-    "file": "assets/vendor-registration-DeoROX1M.js",
+    "file": "assets/vendor-registration-E6Ym4uDp.js",
     "name": "vendor-registration",
     "src": "resources/js/vendor-registration.tsx",
     "isEntry": true,
@@ -577,7 +583,7 @@
       "_checkbox-DNoUT1cs.js",
       "_dropdown-menu-Cgz6kUR2.js",
       "_footer-DYYFf_F2.js",
-      "_textarea-cqYOnKRt.js",
+      "_textarea-CBA21ja8.js",
       "_Certificate01Icon-CgM3MQUT.js",
       "_Mail01Icon-qGLuNJQs.js",
       "_UserIcon-CghnPdiK.js",

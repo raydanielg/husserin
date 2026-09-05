@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Loading03Icon, Add01Icon } from "@hugeicons/core-free-icons"
+import { Loading03Icon, Add01Icon, Mail01Icon, Copy01Icon, CheckmarkCircle02Icon } from "@hugeicons/core-free-icons"
 import { useToast } from "@/hooks/use-toast"
 import { formatDate } from "./helpers"
 import CreateTeamMemberModal from "./create-team-modal"
@@ -20,6 +20,8 @@ export default function SettingsTeam() {
   const [loading, setLoading] = useState(true)
   const [createOpen, setCreateOpen] = useState(false)
   const [accessDenied, setAccessDenied] = useState(false)
+  const [resending, setResending] = useState<number | null>(null)
+  const [copiedId, setCopiedId] = useState<number | null>(null)
 
   const fetchUsers = useCallback(() => {
     fetch("/api/admin/team")
@@ -49,6 +51,60 @@ export default function SettingsTeam() {
         success("Updated", `User ${!current ? "activated" : "deactivated"}`)
       } else {
         error("Failed", "Could not update user")
+      }
+    } catch {
+      error("Connection error", "Could not connect")
+    }
+  }
+
+  const handleResend = async (id: number, name: string) => {
+    setResending(id)
+    try {
+      const res = await fetch(`/api/admin/team/${id}/resend`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || "",
+        },
+      })
+      const data = await res.json()
+      if (res.ok) {
+        if (data.email_sent) {
+          success("Invitation sent", data.message)
+        } else {
+          error("Email failed", data.message)
+          if (data.setup_url) {
+            window.open(data.setup_url, "_blank")
+          }
+        }
+      } else {
+        error("Failed", data.message || "Could not resend invitation")
+      }
+    } catch {
+      error("Connection error", "Could not connect")
+    }
+    setResending(null)
+  }
+
+  const handleCopyLink = async (id: number, name: string) => {
+    try {
+      const res = await fetch(`/api/admin/team/${id}/resend`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || "",
+        },
+      })
+      const data = await res.json()
+      if (res.ok && data.setup_url) {
+        await navigator.clipboard.writeText(data.setup_url)
+        setCopiedId(id)
+        success("Link copied", "Setup link copied to clipboard")
+        setTimeout(() => setCopiedId(null), 2000)
+      } else if (res.ok && data.email_sent) {
+        success("Invitation sent", "Email was sent successfully — no need to copy")
+      } else {
+        error("Failed", "Could not get setup link")
       }
     } catch {
       error("Connection error", "Could not connect")
@@ -90,14 +146,14 @@ export default function SettingsTeam() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[600px]">
+            <table className="w-full min-w-[700px]">
               <thead>
                 <tr className="border-b border-border">
                   <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Name</th>
                   <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Email</th>
                   <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Role</th>
                   <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Status</th>
-                  <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Joined</th>
+                  <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Invitation</th>
                   <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">Actions</th>
                 </tr>
               </thead>
@@ -116,14 +172,44 @@ export default function SettingsTeam() {
                         {u.is_active ? "Active" : "Inactive"}
                       </span>
                     </td>
-                    <td className="py-3 text-sm text-muted-foreground">{formatDate(u.created_at)}</td>
                     <td className="py-3">
-                      <button
-                        onClick={() => toggleActive(u.id, u.is_active)}
-                        className={`rounded-md px-2.5 py-1 text-xs font-medium ${u.is_active ? "bg-red-500/10 text-red-600 hover:bg-red-500/20" : "bg-green-500/10 text-green-600 hover:bg-green-500/20"}`}
-                      >
-                        {u.is_active ? "Deactivate" : "Activate"}
-                      </button>
+                      <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium bg-amber-500/10 text-amber-600 border-amber-500/20`}>
+                        Pending
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() => handleResend(u.id, u.name)}
+                          disabled={resending === u.id}
+                          title="Resend invitation email"
+                          className="flex items-center gap-1 rounded-md bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary hover:bg-primary/20 disabled:opacity-50"
+                        >
+                          {resending === u.id ? (
+                            <HugeiconsIcon icon={Loading03Icon} strokeWidth={2} className="size-3 animate-spin" />
+                          ) : (
+                            <HugeiconsIcon icon={Mail01Icon} strokeWidth={2} className="size-3" />
+                          )}
+                          Resend
+                        </button>
+                        <button
+                          onClick={() => handleCopyLink(u.id, u.name)}
+                          title="Copy setup link"
+                          className="flex items-center gap-1 rounded-md bg-muted px-2 py-1 text-xs font-medium text-muted-foreground hover:bg-muted/80"
+                        >
+                          {copiedId === u.id ? (
+                            <HugeiconsIcon icon={CheckmarkCircle02Icon} strokeWidth={2} className="size-3 text-green-600" />
+                          ) : (
+                            <HugeiconsIcon icon={Copy01Icon} strokeWidth={2} className="size-3" />
+                          )}
+                        </button>
+                        <button
+                          onClick={() => toggleActive(u.id, u.is_active)}
+                          className={`rounded-md px-2.5 py-1 text-xs font-medium ${u.is_active ? "bg-red-500/10 text-red-600 hover:bg-red-500/20" : "bg-green-500/10 text-green-600 hover:bg-green-500/20"}`}
+                        >
+                          {u.is_active ? "Deactivate" : "Activate"}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

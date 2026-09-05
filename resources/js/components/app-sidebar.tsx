@@ -166,10 +166,10 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 }
 
 export function AppSidebar({ userRole, ...props }: AppSidebarProps) {
-  const role = userRole || "STAFF"
-  const filteredNavMain = allNavMain.filter(
-    (item) => item.roles.includes(role)
-  )
+  const role = userRole || null
+  const filteredNavMain = role
+    ? allNavMain.filter((item) => item.roles.includes(role))
+    : allNavMain.filter((item) => item.roles.includes("STAFF"))
 
   return (
     <Sidebar collapsible="icon" {...props}>

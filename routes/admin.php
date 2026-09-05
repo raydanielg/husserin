@@ -46,4 +46,5 @@ Route::middleware(['web', 'auth', 'admin'])->prefix('api/admin')->group(function
     Route::get('/team', [TeamController::class, 'index'])->middleware('superadmin');
     Route::post('/team', [TeamController::class, 'create'])->middleware('superadmin');
     Route::put('/team/{id}', [TeamController::class, 'update'])->middleware('superadmin');
+    Route::post('/team/{id}/resend', [TeamController::class, 'resendInvitation'])->middleware('superadmin');
 });

@@ -46,19 +46,27 @@ class TeamController extends Controller
 
         $setupUrl = url("/set-password?token={$token}&email=" . urlencode($validated['email']));
 
-        Mail::to($validated['email'])->send(new TeamInvitation(
-            $validated['name'],
-            $validated['email'],
-            $validated['role'],
-            $setupUrl,
-        ));
+        $emailSent = true;
+        $emailError = null;
+
+        try {
+            Mail::to($validated['email'])->send(new TeamInvitation(
+                $validated['name'],
+                $validated['email'],
+                $validated['role'],
+                $setupUrl,
+            ));
+        } catch (\Exception $e) {
+            $emailSent = false;
+            $emailError = $e->getMessage();
+        }
 
         AuditLog::create([
             'user_id' => auth()->id(),
             'action' => 'TEAM_CREATED',
             'module' => 'Team',
             'reference_number' => $user->email,
-            'description' => "Created user {$user->name} with role {$user->role} and sent invitation email",
+            'description' => "Created user {$user->name} with role {$user->role}" . ($emailSent ? " and sent invitation email" : " (email failed: {$emailError})"),
             'new_values' => ['name' => $user->name, 'email' => $user->email, 'role' => $user->role],
             'ip_address' => $request->ip(),
         ]);
@@ -66,8 +74,70 @@ class TeamController extends Controller
         return response()->json([
             'success' => true,
             'user' => $user->only(['id', 'name', 'email', 'role', 'is_active', 'created_at']),
-            'message' => 'Invitation email sent to ' . $validated['email'],
+            'message' => $emailSent
+                ? 'Invitation email sent to ' . $validated['email']
+                : 'User created but email could not be sent. Share the setup link manually.',
+            'email_sent' => $emailSent,
+            'setup_url' => $emailSent ? null : $setupUrl,
         ], 201);
+    }
+
+    public function resendInvitation(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (!$user->password_setup_token) {
+            $token = Str::random(60);
+            $user->update([
+                'password_setup_token' => $token,
+                'password_setup_expires_at' => now()->addHours(48),
+            ]);
+        } else {
+            if ($user->password_setup_expires_at && $user->password_setup_expires_at->isPast()) {
+                $token = Str::random(60);
+                $user->update([
+                    'password_setup_token' => $token,
+                    'password_setup_expires_at' => now()->addHours(48),
+                ]);
+            } else {
+                $token = $user->password_setup_token;
+            }
+        }
+
+        $setupUrl = url("/set-password?token={$token}&email=" . urlencode($user->email));
+
+        $emailSent = true;
+        $emailError = null;
+
+        try {
+            Mail::to($user->email)->send(new TeamInvitation(
+                $user->name,
+                $user->email,
+                $user->role,
+                $setupUrl,
+            ));
+        } catch (\Exception $e) {
+            $emailSent = false;
+            $emailError = $e->getMessage();
+        }
+
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'action' => 'TEAM_RESEND_INVITATION',
+            'module' => 'Team',
+            'reference_number' => $user->email,
+            'description' => "Resent invitation to {$user->name}" . ($emailSent ? "" : " (email failed: {$emailError})"),
+            'ip_address' => $request->ip(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => $emailSent
+                ? 'Invitation email resent to ' . $user->email
+                : 'Email could not be sent. Share the setup link manually.',
+            'email_sent' => $emailSent,
+            'setup_url' => $emailSent ? null : $setupUrl,
+        ]);
     }
 
     public function update(Request $request, $id)
