@@ -260,7 +260,7 @@
     "src": "node_modules/@fontsource-variable/roboto/files/roboto-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-60BKixjc.css",
+    "file": "assets/app-DFpnPxf9.css",
     "name": "app",
     "names": [
       "app.css"
@@ -293,7 +293,7 @@
     ]
   },
   "resources/js/admin.tsx": {
-    "file": "assets/admin-CFyDs5Lp.js",
+    "file": "assets/admin-C9q19PPm.js",
     "name": "admin",
     "src": "resources/js/admin.tsx",
     "isEntry": true,

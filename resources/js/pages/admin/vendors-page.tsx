@@ -64,7 +64,7 @@ export default function VendorsPage({ fixedStatus }: { fixedStatus?: string }) {
       if (res.ok) {
         setData(prev => prev ? {
           ...prev,
-          data: prev.data.map(v => v.id === id ? d.vendor : v),
+          data: prev.data?.map(v => v.id === id ? d.vendor : v) ?? [],
         } : null)
         success("Status updated", `Vendor ${status}`)
       } else {
@@ -121,9 +121,9 @@ export default function VendorsPage({ fixedStatus }: { fixedStatus?: string }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.data.length === 0 ? (
+                  {(data?.data?.length ?? 0) === 0 ? (
                     <tr><td colSpan={8} className="py-12 text-center text-sm text-muted-foreground">No vendors found</td></tr>
-                  ) : data?.data.map((v) => (
+                  ) : data?.data?.map((v) => (
                     <tr key={v.id} className="border-b border-border/50 transition-colors hover:bg-muted/30">
                       <td className="py-3 text-sm font-medium text-primary">{v.enquiry_id}</td>
                       <td className="py-3 text-sm font-medium">{v.company_name}</td>

@@ -181,11 +181,11 @@ export default function DashboardAnalytics() {
   }
 
   const d = data
-  const maxMonthly = Math.max(...(d?.monthly.map((m) => m.total) || [1]), 1)
+  const maxMonthly = Math.max(...(d?.monthly?.map((m) => m.total) || [1]), 1)
 
   // Donut chart calculations
   const totalEnquiries = d?.total_enquiries ?? 0
-  const donutSegments = d ? Object.entries(d.by_type).map(([type, count]) => ({
+  const donutSegments = d ? Object.entries(d.by_type || {}).map(([type, count]) => ({
     type,
     count,
     percentage: totalEnquiries > 0 ? (count / totalEnquiries) * 100 : 0,
@@ -260,7 +260,7 @@ export default function DashboardAnalytics() {
           </div>
         </div>
         <div className="flex h-56 items-end gap-1.5">
-          {d?.monthly.map((m, i) => (
+          {d?.monthly?.map((m, i) => (
             <div key={i} className="flex flex-1 flex-col items-center gap-1.5 group">
               <div className="relative flex w-full flex-1 flex-col justify-end gap-px">
                 {/* Tooltip */}
@@ -339,7 +339,7 @@ export default function DashboardAnalytics() {
         <div className="rounded-xl border border-border bg-background p-5">
           <h3 className="text-sm font-semibold mb-4">Type Performance</h3>
           <div className="space-y-4">
-            {d?.type_performance.map((tp) => {
+            {d?.type_performance?.map((tp) => {
               const Icon = typeIcons[tp.type] || Mail01Icon
               return (
                 <div key={tp.type} className="flex items-center justify-between">
@@ -404,7 +404,7 @@ export default function DashboardAnalytics() {
         <div className="rounded-xl border border-border bg-background p-5">
           <h3 className="text-sm font-semibold mb-4">Status Breakdown</h3>
           <div className="space-y-3">
-            {d?.status_breakdown.map((s) => (
+            {d?.status_breakdown?.map((s) => (
               <Link
                 key={s.status}
                 to={`/admin/enquiries?status=${s.status}`}
@@ -431,7 +431,7 @@ export default function DashboardAnalytics() {
         <div className="rounded-xl border border-border bg-background p-5">
           <h3 className="text-sm font-semibold mb-4">Priority Distribution</h3>
           <div className="space-y-3">
-            {d?.priority_breakdown.map((p) => (
+            {d?.priority_breakdown?.map((p) => (
               <div key={p.priority} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className={`size-2.5 rounded-full ${priorityDotColors[p.priority] || "bg-gray-400"}`} />
@@ -485,12 +485,12 @@ export default function DashboardAnalytics() {
         <div className="rounded-xl border border-border bg-background p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold">Operational Alerts</h3>
-            {(d?.alerts.length ?? 0) > 0 && (
-              <span className="rounded-md bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600 dark:bg-red-950/50">{d?.alerts.length}</span>
+            {(d?.alerts?.length ?? 0) > 0 && (
+              <span className="rounded-md bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600 dark:bg-red-950/50">{d?.alerts?.length}</span>
             )}
           </div>
           <div className="space-y-3">
-            {d?.alerts.map((alert) => (
+            {d?.alerts?.map((alert) => (
               <div key={alert.id} className="flex items-start justify-between gap-3 border-b pb-3 last:border-0 last:pb-0">
                 <div className="flex items-start gap-2">
                   <div className={`mt-0.5 flex size-6 items-center justify-center rounded ${severityColors[alert.severity]}`}>
@@ -504,7 +504,7 @@ export default function DashboardAnalytics() {
                 </div>
               </div>
             ))}
-            {(d?.alerts.length ?? 0) === 0 && (
+            {(d?.alerts?.length ?? 0) === 0 && (
               <p className="text-sm text-muted-foreground text-center py-4">No active alerts</p>
             )}
           </div>
@@ -514,10 +514,10 @@ export default function DashboardAnalytics() {
         <div className="rounded-xl border border-border bg-background p-5">
           <h3 className="text-sm font-semibold mb-4">Recent Activity</h3>
           <div className="space-y-3">
-            {d?.recent_activity.length === 0 && (
+            {(d?.recent_activity?.length ?? 0) === 0 && (
               <p className="text-sm text-muted-foreground text-center py-4">No recent activity</p>
             )}
-            {d?.recent_activity.map((a) => (
+            {d?.recent_activity?.map((a) => (
               <div key={a.id} className="flex items-start gap-3">
                 <div className="mt-1 size-1.5 rounded-full bg-muted-foreground/40" />
                 <div className="flex-1">

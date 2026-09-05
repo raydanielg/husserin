@@ -111,9 +111,9 @@ export default function EnquiriesList({ fixedType }: { fixedType?: string }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.data.length === 0 ? (
+                  {(data?.data?.length ?? 0) === 0 ? (
                     <tr><td colSpan={7} className="py-12 text-center text-sm text-muted-foreground">No enquiries found</td></tr>
-                  ) : data?.data.map((e) => (
+                  ) : data?.data?.map((e) => (
                     <tr key={e.id} className="border-b border-border/50 transition-colors hover:bg-muted/30">
                       <td className="py-3 text-sm font-medium text-primary">
                         <Link to={`/admin/enquiries/${e.id}`}>{e.reference_number}</Link>
