@@ -4,115 +4,111 @@ import * as React from "react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { LayoutBottomIcon, AudioWave01Icon, CommandIcon, ComputerTerminalIcon, RoboticIcon, BookOpen02Icon, Settings05Icon, CropIcon, PieChartIcon, MapsIcon } from "@hugeicons/core-free-icons"
+import {
+  Globe02Icon,
+  PackageIcon,
+  DocumentValidationIcon,
+  GlobalSearchIcon,
+  UserGroupIcon,
+  Mail01Icon,
+  ChartLineIcon,
+  TruckIcon,
+  Settings05Icon,
+  BuildingIcon,
+  ToolsIcon,
+  PlaneIcon,
+  BoltIcon,
+} from "@hugeicons/core-free-icons"
 
-// This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Husserin Investment",
       logo: (
-        <HugeiconsIcon icon={LayoutBottomIcon} strokeWidth={2} />
+        <HugeiconsIcon icon={Globe02Icon} strokeWidth={2} className="size-4" />
       ),
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: (
-        <HugeiconsIcon icon={AudioWave01Icon} strokeWidth={2} />
-      ),
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: (
-        <HugeiconsIcon icon={CommandIcon} strokeWidth={2} />
-      ),
-      plan: "Free",
+      plan: "Admin Dashboard",
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "Dashboard",
+      url: "/dashboard",
       icon: (
-        <HugeiconsIcon icon={ComputerTerminalIcon} strokeWidth={2} />
+        <HugeiconsIcon icon={ChartLineIcon} strokeWidth={2} />
       ),
       isActive: true,
       items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
+        { title: "Overview", url: "/dashboard" },
+        { title: "Analytics", url: "/dashboard" },
       ],
     },
     {
-      title: "Models",
+      title: "Enquiries",
       url: "#",
       icon: (
-        <HugeiconsIcon icon={RoboticIcon} strokeWidth={2} />
+        <HugeiconsIcon icon={Mail01Icon} strokeWidth={2} />
       ),
       items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
+        { title: "All Enquiries", url: "#" },
+        { title: "Vendor Registrations", url: "#" },
+        { title: "RFQ Submissions", url: "#" },
+        { title: "Contact Messages", url: "#" },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
+      title: "Trading & Supply",
+      url: "/trading",
       icon: (
-        <HugeiconsIcon icon={BookOpen02Icon} strokeWidth={2} />
+        <HugeiconsIcon icon={PackageIcon} strokeWidth={2} />
       ),
       items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
+        { title: "Overview", url: "/trading" },
+        { title: "Orders", url: "#" },
+        { title: "Suppliers", url: "#" },
+      ],
+    },
+    {
+      title: "Tender & Procurement",
+      url: "/tender",
+      icon: (
+        <HugeiconsIcon icon={DocumentValidationIcon} strokeWidth={2} />
+      ),
+      items: [
+        { title: "Active Tenders", url: "/tender" },
+        { title: "Procurement", url: "/tender" },
+        { title: "Compliance", url: "#" },
+      ],
+    },
+    {
+      title: "Cargo Consolidation",
+      url: "/consolidation",
+      icon: (
+        <HugeiconsIcon icon={TruckIcon} strokeWidth={2} />
+      ),
+      items: [
+        { title: "Shipments", url: "/consolidation" },
+        { title: "Consolidation Orders", url: "#" },
+      ],
+    },
+    {
+      title: "Vendors",
+      url: "/vendor-registration",
+      icon: (
+        <HugeiconsIcon icon={UserGroupIcon} strokeWidth={2} />
+      ),
+      items: [
+        { title: "All Vendors", url: "/vendor-registration" },
+        { title: "Pending Review", url: "#" },
+        { title: "Approved", url: "#" },
       ],
     },
     {
@@ -122,45 +118,39 @@ const data = {
         <HugeiconsIcon icon={Settings05Icon} strokeWidth={2} />
       ),
       items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
+        { title: "General", url: "#" },
+        { title: "Team", url: "#" },
+        { title: "Billing", url: "#" },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
+      name: "Government & Institutions",
+      url: "/industries",
       icon: (
-        <HugeiconsIcon icon={CropIcon} strokeWidth={2} />
+        <HugeiconsIcon icon={BuildingIcon} strokeWidth={2} className="size-4" />
       ),
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
+      name: "Construction",
+      url: "/industries",
       icon: (
-        <HugeiconsIcon icon={PieChartIcon} strokeWidth={2} />
+        <HugeiconsIcon icon={ToolsIcon} strokeWidth={2} className="size-4" />
       ),
     },
     {
-      name: "Travel",
-      url: "#",
+      name: "Aviation",
+      url: "/industries",
       icon: (
-        <HugeiconsIcon icon={MapsIcon} strokeWidth={2} />
+        <HugeiconsIcon icon={PlaneIcon} strokeWidth={2} className="size-4" />
+      ),
+    },
+    {
+      name: "Energy",
+      url: "/industries",
+      icon: (
+        <HugeiconsIcon icon={BoltIcon} strokeWidth={2} className="size-4" />
       ),
     },
   ],
@@ -176,9 +166,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

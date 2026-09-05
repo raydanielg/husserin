@@ -46,6 +46,10 @@ Route::get('/track', function () {
     return view('track');
 })->name('track');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 Route::get('/vendor-registration', function () {
     return view('vendor-registration');
 })->name('vendor-registration');
