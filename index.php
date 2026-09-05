@@ -21,7 +21,7 @@ require __DIR__.'/vendor/autoload.php';
 $app = require_once __DIR__.'/bootstrap/app.php';
 
 // Ensure Laravel uses the public/ directory as its public path
-$app->setPublicPath(__DIR__.'/public');
+$app->usePublicPath(__DIR__.'/public');
 
 $app->handleRequest(
     Illuminate\Http\Request::capture()
