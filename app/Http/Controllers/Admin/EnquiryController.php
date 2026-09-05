@@ -156,6 +156,73 @@ class EnquiryController extends Controller
         return response()->json($enquiry);
     }
 
+    public function update(Request $request, $id)
+    {
+        $enquiry = Enquiry::findOrFail($id);
+
+        $validated = $request->validate([
+            'company_name' => ['sometimes', 'string', 'max:255'],
+            'contact_person' => ['sometimes', 'string', 'max:255'],
+            'email' => ['sometimes', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'country' => ['nullable', 'string', 'max:100'],
+            'priority' => ['sometimes', 'in:LOW,NORMAL,HIGH,URGENT'],
+            'description' => ['nullable', 'string'],
+            'tender_reference' => ['nullable', 'string', 'max:255'],
+            'tender_organization' => ['nullable', 'string', 'max:255'],
+            'tender_scope' => ['nullable', 'string'],
+            'tender_closing_date' => ['nullable', 'date'],
+            'tender_category' => ['nullable', 'string', 'max:255'],
+            'tender_destination' => ['nullable', 'string', 'max:255'],
+            'cargo_details' => ['nullable', 'string'],
+            'supplier_info' => ['nullable', 'string'],
+            'origin' => ['nullable', 'string', 'max:255'],
+            'destination' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $oldValues = $enquiry->toArray();
+
+        $enquiry->update(collect($validated)->only([
+            'company_name', 'contact_person', 'email', 'phone', 'country', 'priority', 'description',
+        ])->toArray());
+
+        if ($enquiry->type === 'TENDER' && $enquiry->tenderDetail) {
+            $tenderData = [];
+            if (isset($validated['tender_reference'])) $tenderData['tender_reference'] = $validated['tender_reference'];
+            if (isset($validated['tender_organization'])) $tenderData['organization'] = $validated['tender_organization'];
+            if (isset($validated['tender_scope'])) $tenderData['scope'] = $validated['tender_scope'];
+            if (isset($validated['tender_closing_date'])) $tenderData['closing_date'] = $validated['tender_closing_date'];
+            if (isset($validated['tender_category'])) $tenderData['category'] = $validated['tender_category'];
+            if (isset($validated['tender_destination'])) $tenderData['destination'] = $validated['tender_destination'];
+            if (!empty($tenderData)) $enquiry->tenderDetail->update($tenderData);
+        }
+
+        if ($enquiry->type === 'CONSOLIDATION' && $enquiry->consolidationDetail) {
+            $consolData = [];
+            if (isset($validated['cargo_details'])) $consolData['cargo_details'] = $validated['cargo_details'];
+            if (isset($validated['supplier_info'])) $consolData['supplier_info'] = $validated['supplier_info'];
+            if (isset($validated['origin'])) $consolData['origin'] = $validated['origin'];
+            if (isset($validated['destination'])) $consolData['destination'] = $validated['destination'];
+            if (!empty($consolData)) $enquiry->consolidationDetail->update($consolData);
+        }
+
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'action' => 'ENQUIRY_UPDATED',
+            'module' => 'Enquiry',
+            'reference_number' => $enquiry->reference_number,
+            'description' => "Updated enquiry {$enquiry->reference_number}",
+            'old_values' => $oldValues,
+            'new_values' => $validated,
+            'ip_address' => $request->ip(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'enquiry' => $enquiry->fresh(['assignedTo:id,name', 'tenderDetail', 'consolidationDetail']),
+        ]);
+    }
+
     public function updateStatus(Request $request, $id)
     {
         $enquiry = Enquiry::findOrFail($id);

@@ -22,6 +22,7 @@ Route::middleware(['auth', 'admin'])->prefix('api/admin')->group(function () {
     Route::get('/enquiries', [EnquiryController::class, 'index']);
     Route::post('/enquiries', [EnquiryController::class, 'create']);
     Route::get('/enquiries/{id}', [EnquiryController::class, 'show']);
+    Route::put('/enquiries/{id}', [EnquiryController::class, 'update']);
     Route::put('/enquiries/{id}/status', [EnquiryController::class, 'updateStatus']);
     Route::put('/enquiries/{id}/assign', [EnquiryController::class, 'assign']);
     Route::put('/enquiries/{id}/priority', [EnquiryController::class, 'updatePriority']);

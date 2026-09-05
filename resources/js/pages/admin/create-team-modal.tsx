@@ -24,7 +24,6 @@ export default function CreateTeamMemberModal({ open, onOpenChange, onCreated }:
   const [form, setForm] = useState({
     name: "",
     email: "",
-    password: "",
     role: "STAFF",
   })
 
@@ -44,9 +43,9 @@ export default function CreateTeamMemberModal({ open, onOpenChange, onCreated }:
       })
       const data = await res.json()
       if (res.ok) {
-        success("Team member added", `${data.user.name} has been created`)
+        success("Invitation sent", data.message || `${data.user.name} has been invited`)
         onOpenChange(false)
-        setForm({ name: "", email: "", password: "", role: "STAFF" })
+        setForm({ name: "", email: "", role: "STAFF" })
         onCreated?.()
       } else {
         error("Failed", data.message || "Could not add team member")
@@ -65,7 +64,7 @@ export default function CreateTeamMemberModal({ open, onOpenChange, onCreated }:
       <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto p-0">
         <SheetHeader className="border-b border-border px-6 py-4">
           <SheetTitle className="text-lg font-semibold">Add Team Member</SheetTitle>
-          <SheetDescription>Create a new admin account. Fields marked with * are required.</SheetDescription>
+          <SheetDescription>Add a new admin account. An invitation email with a password setup link will be sent automatically.</SheetDescription>
         </SheetHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-5 overflow-y-auto px-6 py-5">
@@ -79,9 +78,10 @@ export default function CreateTeamMemberModal({ open, onOpenChange, onCreated }:
             <input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} required className={inputClass} placeholder="john@husserin.com" />
           </div>
 
-          <div>
-            <label className={labelClass}>Password *</label>
-            <input type="password" value={form.password} onChange={(e) => set("password", e.target.value)} required minLength={8} className={inputClass} placeholder="Minimum 8 characters" />
+          <div className="rounded-lg border border-border bg-muted/30 p-4">
+            <p className="text-sm text-muted-foreground">
+              An email invitation will be sent to this address with a link to set their password. The link expires in 48 hours.
+            </p>
           </div>
 
           <div>
@@ -96,7 +96,7 @@ export default function CreateTeamMemberModal({ open, onOpenChange, onCreated }:
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button type="submit" disabled={loading}>
               {loading ? <HugeiconsIcon icon={Loading03Icon} strokeWidth={2} className="size-4 animate-spin" /> : null}
-              Add Member
+              Add Member & Send Invite
             </Button>
           </SheetFooter>
         </form>

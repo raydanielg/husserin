@@ -203,7 +203,7 @@ export function LoginForm({
                   Password
                 </FieldLabel>
                 <a
-                  href="#"
+                  href="/forgot-password"
                   className="text-base font-medium text-primary underline-offset-4 hover:underline"
                 >
                   Forgot password?

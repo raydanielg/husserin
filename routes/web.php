@@ -15,6 +15,14 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('forgot-password');
+
+Route::get('/set-password', function () {
+    return view('auth.set-password');
+})->name('set-password');
+
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
@@ -120,3 +128,5 @@ Route::post('/api/track', [TrackingController::class, 'lookup']);
 Route::post('/api/login', [AuthController::class, 'login']);
 Route::post('/api/logout', [AuthController::class, 'logout']);
 Route::get('/api/me', [AuthController::class, 'me']);
+Route::post('/api/forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('/api/set-password', [AuthController::class, 'setPassword']);
